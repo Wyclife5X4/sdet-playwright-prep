@@ -45,3 +45,25 @@ def test_invalid_password_login(page: Page):
     expect(error_message).to_have_text("Your password is invalid!")
 
     print("\n✅ Invalid login test passed!")
+
+
+
+
+    from playwright.sync_api import Page, expect
+from pages.login_page import LoginPage
+
+def test_successful_login(page: Page):
+    login_page = LoginPage(page)
+    login_page.navigate()
+    login_page.login("student", "Password123")
+
+    expect(page).to_have_url("https://practicetestautomation.com/logged-in-successfully/")
+    expect(page.get_by_role("heading", name="Logged In Successfully")).to_be_visible()
+
+def test_invalid_password_login(page: Page):
+    login_page = LoginPage(page)
+    login_page.navigate()
+    login_page.login("student", "WrongPassword123")
+
+    expect(login_page.error_message).to_be_visible()
+    expect(login_page.error_message).to_have_text("Your password is invalid!")
