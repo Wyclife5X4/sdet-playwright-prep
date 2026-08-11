@@ -7,6 +7,10 @@ class LoginPage:
         self.password_input = page.get_by_label("Password")
         self.submit_button = page.get_by_role("button", name="Submit")
         self.error_message = page.locator("#error")
+        self.success_message = page.get_by_role(
+    "heading",
+    name="Logged In Successfully"
+)
 
     def navigate(self):
         self.page.goto("https://practicetestautomation.com/practice-test-login/")
